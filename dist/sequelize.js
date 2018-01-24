@@ -9,7 +9,7 @@ const sequelize = new sequelize_typescript_1.Sequelize({
     dialect: "mysql",
     username: config.get("database.username"),
     password: config.get("database.password"),
-    modelPaths: ["/Users/Steve/eclipse-workspace/TrackThis/dist/models"],
+    modelPaths: ["/Users/Steve/Documents/ExpenseThis/dist/models"],
     logging: logger.debug.bind(logger)
 });
 exports.default = sequelize;
