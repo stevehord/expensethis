@@ -1,0 +1,7 @@
+{
+    "database":{
+        "user": "staging",
+        "password": "Telem@rk8",
+        "schema": "expenseThis"
+    }
+}

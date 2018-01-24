@@ -1,0 +1,85 @@
+{
+  "name": "TrackThis",
+  "version": "0.1.0",
+  "description": "A backend framework for tracking expenses",
+  "author": "Stephen Hord",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run serve",
+    "build": " gulp copy && npm run build-ts && npm run tslint",
+    "serve": "NODE_ENV=prod node dist/server.js",
+    "watch-node": "nodemon dist/server.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "test": "jest --forceExit",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "build-sass": "node-sass src/public/css/main.scss dist/public/css/main.css",
+    "watch-sass": "node-sass -w src/public/css/main.scss dist/public/css/main.css",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "copy-static-assets": "node copyStaticAssets.js"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/test/**/*.test.(ts|js)"
+    ],
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "async": "^2.5.0",
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.18.2",
+    "multer": "*",
+    "compression": "^1.7.1",
+    "dotenv": "^2.0.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.2",
+    "express-flash": "0.0.2",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.2.1",
+    "request": "^2.83.0",
+    "sequelize": "^4.29.0",
+    "mysql2": "^1.5.1",
+    "reflect-metadata": "0.1.10",
+    "sequelize-typescript": "0.6.2",
+    "routing-controllers": "*",
+    "bluebird": "3.5.1",
+    "bunyan": "*",
+    "config": "*"
+  },
+  "devDependencies": {
+    "@types/async": "^2.0.40",
+    "@types/bcrypt-nodejs": "0.0.30",
+    "@types/body-parser": "^1.16.2",
+    "@types/compression": "0.0.33",
+    "@types/connect-mongo": "0.0.34",
+    "@types/dotenv": "^2.0.20",
+    "@types/errorhandler": "0.0.32",
+    "@types/express": "^4.11.0",
+    "@types/express-session": "^1.15.5",
+    "@types/morgan": "^1.7.32",
+    "@types/node": "^7.0.12",
+    "@types/request": "^2.0.7",
+    "ts-jest": "^21.1.4",
+    "tslint": "^5.8.0",
+    "typescript": "^2.4.0",
+    "@types/sequelize": "^4.27.0",
+    "@types/reflect-metadata": "0.0.4",
+    "@types/bluebird": " 3.5.19",
+    "@types/bunyan": "1.8.4",
+    "gulp": "latest",
+    "gulp-util": "latest",
+    "@types/config": "latest"
+  }
+}
