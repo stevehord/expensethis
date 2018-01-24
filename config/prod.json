@@ -2,6 +2,7 @@
     "database":{
         "username": "root",
         "password": "Telem@rk8",
-        "schema": "expenseThis"
+        "schema": "expenseThis",
+        "notes": "encrypted"
     }
 }
