@@ -53,10 +53,11 @@
     "mysql2": "^1.5.1",
     "reflect-metadata": "0.1.10",
     "sequelize-typescript": "0.6.2",
-    "routing-controllers": "*",
+    "routing-controllers": "latest",
     "bluebird": "3.5.1",
-    "bunyan": "*",
-    "config": "*"
+    "bunyan": "latest",
+    "config": "latest",
+    "log4js": "latest"
   },
   "devDependencies": {
     "@types/async": "^2.0.40",
@@ -80,6 +81,7 @@
     "@types/bunyan": "1.8.4",
     "gulp": "latest",
     "gulp-util": "latest",
-    "@types/config": "latest"
+    "@types/config": "latest",
+    "@types/log4js": "latest"
   }
 }
