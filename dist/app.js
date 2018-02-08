@@ -24,16 +24,24 @@ require("reflect-metadata"); // this shim is required
 const routing_controllers_1 = require("routing-controllers");
 const BookController_1 = require("./controllers/BookController");
 const ModelController_1 = require("./controllers/ModelController");
+// import * as Logger from "bunyan";
+const config = require("config");
+const Logger_1 = require("./utils/Logger");
+const log4js = require("log4js");
+log4js.configure("./config/log4js.json");
+const logger = new Logger_1.default("App");
 // creates express app, registers all controller routes and returns you express app instance
 const app = routing_controllers_1.createExpressServer({
     classTransformer: false,
     // defaultErrorHandler: false,
     controllers: [BookController_1.default, ModelController_1.default] // we specify controllers we want to use
 });
-// Logger.createLogger({}).level = Logger.DEBUG;
-// run express application on port 3000
-app.listen(3000);
-console.log(process.env.PORT);
-console.log(process.env.HOME);
+app.use(log4js.connectLogger(log4js.getLogger("Express"), {}));
+app.listen(3001);
+logger.debug(process.env.PORT);
+logger.debug(process.env.HOME);
+logger.debug("Debugging from the app");
+logger.error("checking out an error");
+logger.debug("CONFIG: " + config.get("port"));
 module.exports = app;
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=App.js.map

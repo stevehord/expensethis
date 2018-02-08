@@ -1,34 +1,37 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-// import ModelController from "./ModelController";
-// import { User } from "../models/User";
-const User_1 = require("../models/User");
-const Book_1 = require("../models/Book");
-class UserController {
-    constructor() {
-        console.log("UserController constructor");
-    }
-    getUserModel(req, res) {
-        console.log("UserController GET");
-        // seq.addModels([Person]);
-        User_1.default.findById(1, { include: [Book_1.default] }).then(user => {
-            console.log(user.firstName + " has " + user.books.length);
-        });
-        User_1.default.findById(1).then(user => {
-            console.log(user.firstName + " has " + user.$get("books").then(books => {
-                console.log(books);
-            }));
-        });
-    }
-    putModel() {
-        console.log("UserController PUT");
-    }
-}
-exports.default = UserController;
-// export {UserController};
-exports.getContact = (req, res) => {
-    res.render("contact", {
-        title: "Contact"
-    });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const routing_controllers_1 = require("routing-controllers");
+const Logger_1 = require("../utils/Logger");
+const ModelRepository_1 = require("../repositories/ModelRepository");
+let UserController = UserController_1 = class UserController {
+    getOneModel(id) {
+        UserController_1.logger.debug("getOneModel (" + id + ")");
+        return ModelRepository_1.default.getModelById("Book", id);
+    }
+};
+UserController.logger = new Logger_1.default("UserController");
+__decorate([
+    routing_controllers_1.Get("/:id"),
+    __param(0, routing_controllers_1.Param("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getOneModel", null);
+UserController = UserController_1 = __decorate([
+    routing_controllers_1.JsonController("/User")
+], UserController);
+exports.default = UserController;
+var UserController_1;
 //# sourceMappingURL=UserController.js.map

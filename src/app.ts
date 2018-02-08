@@ -32,8 +32,14 @@ import { createExpressServer } from "routing-controllers";
 import BookController from "./controllers/BookController";
 import ModelController from "./controllers/ModelController";
 
-import * as Logger from "bunyan";
+// import * as Logger from "bunyan";
 import * as config from "config";
+import Logger from "./utils/Logger";
+import * as log4js  from "log4js";
+
+
+log4js.configure("./config/log4js.json");
+const logger = new Logger("App");
 
 // creates express app, registers all controller routes and returns you express app instance
 const app = createExpressServer({
@@ -41,10 +47,17 @@ const app = createExpressServer({
     // defaultErrorHandler: false,
     controllers: [BookController, ModelController] // we specify controllers we want to use
 });
-// Logger.createLogger({}).level = Logger.DEBUG;
-// run express application on port 3000
-app.listen(3000);
-console.log(process.env.PORT);
-console.log(process.env.HOME);
+
+app.use(log4js.connectLogger(log4js.getLogger("Express"), {}));
+app.listen(3001);
+
+
+logger.debug(process.env.PORT);
+logger.debug(process.env.HOME);
+logger.debug("Debugging from the app");
+logger.error("checking out an error");
+
+
+logger.debug("CONFIG: " + config.get("port"));
 
 module.exports = app;

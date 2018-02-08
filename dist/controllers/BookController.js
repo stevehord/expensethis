@@ -13,15 +13,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
+const Logger_1 = require("../utils/Logger");
 const ModelRepository_1 = require("../repositories/ModelRepository");
-const Logger = require("bunyan");
-let BookController = BookController_1 = class BookController {
+let BookController = class BookController {
+    constructor() {
+        this.logger = new Logger_1.default("BookController");
+    }
     getOneModel(id) {
-        BookController_1.logger.debug("getOneModel (" + id + ")");
+        this.logger.debug("getOneModel (" + id + ")");
         return ModelRepository_1.default.getModelById("Book", id);
     }
 };
-BookController.logger = Logger.createLogger({ name: "BookController" });
 __decorate([
     routing_controllers_1.Get("/:id"),
     __param(0, routing_controllers_1.Param("id")),
@@ -29,9 +31,8 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], BookController.prototype, "getOneModel", null);
-BookController = BookController_1 = __decorate([
+BookController = __decorate([
     routing_controllers_1.JsonController("/Book")
 ], BookController);
 exports.default = BookController;
-var BookController_1;
 //# sourceMappingURL=BookController.js.map

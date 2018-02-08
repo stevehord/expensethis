@@ -1,7 +1,0 @@
-{
-    "database":{
-        "user": "root",
-        "password": "Telem@rk8",
-        "schema": "expenseThis"
-    }
-}

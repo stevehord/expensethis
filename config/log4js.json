@@ -1,0 +1,18 @@
+{
+  "appenders": {
+    "console": { "type": "stdout" },
+    "file": { "type": "file",
+            "filename": "application.log",
+            "layout": {"type": "pattern", "pattern": "%d %h %p %c %m%n"},
+            "maxLogSize": 10485760,
+            "backups": 3,
+            "compress": false
+        }
+},
+"categories": {
+    "default": { "appenders": [ "console", "file" ], "level": "all" },
+    "BookController": { "appenders": [ "console", "file" ], "level": "all" },
+    "Express": { "appenders": [ "console", "file" ], "level": "all" },
+    "Sequelize": { "appenders": [ "console", "file" ], "level": "off" }
+}
+}

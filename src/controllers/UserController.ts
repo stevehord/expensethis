@@ -1,45 +1,20 @@
-import { Request, Response } from "express";
-// import ModelController from "./ModelController";
-// import { User } from "../models/User";
+import { JsonController, Param, Body, Get, Post, Put, Delete } from "routing-controllers";
+
 import User from "../models/User";
 import Book from "../models/Book";
 import BaseModel from "../models/Model";
+import Logger from "../utils/Logger";
 import ModelRepository from "../repositories/ModelRepository";
 
 
+@JsonController("/User")
 export default class UserController {
 
-  constructor() {
-    console.log("UserController constructor");
-    }
+  private static logger = new Logger("UserController");
 
-  getUserModel(req: Request, res: Response) {
-    console.log("UserController GET");
-
-    // seq.addModels([Person]);
-  User.findById(1, { include : [ Book ] }).then(user => {
-    console.log(user.firstName + " has " + user.books.length);
-    });
-
-  User.findById(1).then(user => {
-    console.log(user.firstName + " has " + user.$get("books").then(books => {
-      console.log(books);
-    }));
-  });
-
-
-  }
-
-  putModel() {
-    console.log("UserController PUT");
+  @Get("/:id")
+  getOneModel(@Param("id") id: number) {
+      UserController.logger.debug("getOneModel (" + id + ")");
+      return ModelRepository.getModelById("Book", id);
   }
 }
-
-// export {UserController};
-
-
-export let getContact = (req: Request, res: Response) => {
-  res.render("contact", {
-    title: "Contact"
-  });
-};

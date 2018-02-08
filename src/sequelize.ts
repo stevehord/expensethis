@@ -1,11 +1,11 @@
-import * as Logger from "bunyan";
-import { Sequelize } from "sequelize-typescript";
 
+import { Sequelize } from "sequelize-typescript";
+import Logger from "./utils/Logger";
 import * as config from "config";
 
 
 
-const logger = Logger.createLogger({name: "Sequelize"});
+const logger = new Logger("Sequelize");
 
 
 const sequelize = new Sequelize({
