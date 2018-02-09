@@ -17,6 +17,7 @@ const Logger_1 = require("../utils/Logger");
 const Bluebird = require("bluebird");
 const ModelRepository_1 = require("../repositories/ModelRepository");
 const ModelFactory_1 = require("../ModelFactory");
+const oDataBuilder_1 = require("../oData/oDataBuilder");
 let ModelController = ModelController_1 = class ModelController {
     getOneModel(modelName, id, res) {
         if (res.headersSent) {
@@ -41,12 +42,12 @@ let ModelController = ModelController_1 = class ModelController {
         if (res.headersSent) {
             return new Bluebird((resolve, reject, onCancel) => { });
         }
-        ModelController_1.logger.info("getModeOdatalListAndCount (" + modelName + ": " + skip + ": " + top + ": " + view + ")");
+        ModelController_1.logger.info("getModeOdatalList (" + modelName + ": " + skip + ": " + top + ": " + view + ")");
         if (view === ModelController_1.RAW) {
-            return ModelRepository_1.default.getModelListByOdataQuery(ModelFactory_1.default.getClass(modelName), skip, top, {}, {});
+            return ModelRepository_1.default.getModelListByOdataQuery(ModelFactory_1.default.getClass(modelName), skip, top, oDataBuilder_1.default.filter(filter), oDataBuilder_1.default.expand(expand));
         }
         else {
-            return ModelRepository_1.default.getModelListAndCountByOdataQuery(ModelFactory_1.default.getClass(modelName), skip, top, { where: { id: 1 } });
+            return ModelRepository_1.default.getModelListAndCountByOdataQuery(ModelFactory_1.default.getClass(modelName), skip, top, oDataBuilder_1.default.filter(filter), oDataBuilder_1.default.expand(expand));
         }
     }
     postModel(modelName, id, model, res) {

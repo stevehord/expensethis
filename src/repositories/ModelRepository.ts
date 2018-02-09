@@ -25,11 +25,11 @@ export default class ModelRepository {
     }
 
     static getModelListByOdataQuery(model: any, offset: number, limit: number = 200, query: any, include: any): Bluebird<{}> {
-        return model.findAll({offset: offset, limit: limit});
+        return model.findAll({offset: offset, limit: limit, where: query, include: include });
     }
 
-    static getModelListAndCountByOdataQuery(model: any, offset: number, limit: number = 200, query: any): Bluebird<{}> {
-        return model.findAndCountAll({offset: offset, limit: limit, include: [{model: sequelize.model("Book")}]});
+    static getModelListAndCountByOdataQuery(model: any, offset: number, limit: number = 200, query: any, include: any): Bluebird<{}> {
+        return model.findAndCountAll({offset: offset, limit: limit, where: query, include: include });
     }
 
     static updateOrInsertModel(modelName: string, model: any): Bluebird<{}> {

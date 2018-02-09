@@ -5,6 +5,7 @@ import Logger from "../utils/Logger";
 import Bluebird = require("bluebird");
 import ModelRepository from "../repositories/ModelRepository";
 import ModelFactory from "../ModelFactory";
+import oData from "../oData/oDataBuilder";
 
 
 @JsonController()
@@ -55,12 +56,13 @@ class ModelController {
     if (res.headersSent) {
       return new Bluebird<{}>((resolve, reject, onCancel) => {});
     }
-    ModelController.logger.info("getModeOdatalListAndCount (" + modelName + ": " + skip + ": " + top +  ": " + view + ")");
+    ModelController.logger.info("getModeOdatalList (" + modelName + ": " + skip + ": " + top +  ": " + view + ")");
+
 
     if (view === ModelController.RAW) {
-      return ModelRepository.getModelListByOdataQuery(ModelFactory.getClass(modelName), skip, top, {}, {});
+      return ModelRepository.getModelListByOdataQuery(ModelFactory.getClass(modelName), skip, top, oData.filter(filter), oData.expand(expand));
     } else {
-      return ModelRepository.getModelListAndCountByOdataQuery(ModelFactory.getClass(modelName), skip, top, {where: {id: 1}});
+      return ModelRepository.getModelListAndCountByOdataQuery(ModelFactory.getClass(modelName), skip, top, oData.filter(filter), oData.expand(expand));
     }
   }
 

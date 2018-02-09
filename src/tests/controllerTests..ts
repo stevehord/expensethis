@@ -81,7 +81,7 @@ describe("Controller Test Cases", () => {
   });
 
   it("Should Return 3 Users from Odata Query", () => {
-    return modelController.getModeOdatalList("User", 0, 3, "", "", "", res).then(result => {
+    return modelController.getModeOdatalList("User", 0, 3, undefined, undefined, undefined, res).then(result => {
       const user: User[] = (<Result>result).rows as User[];
       expect(user.length).to.equal(3);
       expect(user[0].id).to.equal(1);

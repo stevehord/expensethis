@@ -18,10 +18,10 @@ class ModelRepository {
         return model.findAll({});
     }
     static getModelListByOdataQuery(model, offset, limit = 200, query, include) {
-        return model.findAll({ offset: offset, limit: limit });
+        return model.findAll({ offset: offset, limit: limit, where: query, include: include });
     }
-    static getModelListAndCountByOdataQuery(model, offset, limit = 200, query) {
-        return model.findAndCountAll({ offset: offset, limit: limit, include: [{ model: Sequelize_1.default.model("Book") }] });
+    static getModelListAndCountByOdataQuery(model, offset, limit = 200, query, include) {
+        return model.findAndCountAll({ offset: offset, limit: limit, where: query, include: include });
     }
     static updateOrInsertModel(modelName, model) {
         return Sequelize_1.default.model(modelName).upsert(model, {}).then(flag => {
