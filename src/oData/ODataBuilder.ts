@@ -24,10 +24,9 @@ import Logger from "../utils/Logger";
     }
 
     public static expand(queryString: string): any {
-        if (queryString == undefined || queryString === "") {
+        if (queryString == undefined || queryString == "") {
             return undefined;
         }
-
         return { model: sequelize.model(queryString) };
     }
 
